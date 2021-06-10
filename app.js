@@ -1,9 +1,11 @@
+var isNewGame;
 var activePlayer;
 var scores;
 var roundScore;
 var diceDom = document.querySelector('.dice'); 
 initGame();
 function initGame(){
+    isNewGame = true;
     activePlayer = 0;
     scores = [0, 0];
     roundScore = 0;
@@ -22,9 +24,10 @@ function initGame(){
     }
 
 document.querySelector('.btn-roll').addEventListener('click', function(){
-    var diceNumber = Math.floor(Math.random() * 6)+1;
-    diceDom.style.display = 'block';
-    diceDom.src = 'dice-' + diceNumber + '.png';
+    if(isNewGame){
+        var diceNumber = Math.floor(Math.random() * 6)+1;
+        diceDom.style.display = 'block';
+        diceDom.src = 'dice-' + diceNumber + '.png';
     if(diceNumber !== 1){
         roundScore = roundScore + diceNumber;
         document.getElementById('current-' + activePlayer).textContent = roundScore;
@@ -32,9 +35,14 @@ document.querySelector('.btn-roll').addEventListener('click', function(){
     else{
         switchToNextPlayer();
     }
+    }
+    else{
+        alert('Togloom duussan baina. NEW GAME tovchiig darj shineer ehluuleerei');
+    }
 });
 
 document.querySelector('.btn-hold').addEventListener('click', function(){
+    if(isNewGame){
     scores[activePlayer] = scores[activePlayer] + roundScore;
     // if(activePlayer === 0){
     //     scores[0] = scores[0] + roundScore;
@@ -44,12 +52,16 @@ document.querySelector('.btn-hold').addEventListener('click', function(){
     // }
     document.getElementById('score-' + activePlayer).textContent = scores[activePlayer];
     if(scores[activePlayer] >= 20){
+        isNewGame = false ;
         document.getElementById('name-' +activePlayer).textContent = 'WINNER!!!';
         document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
         document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active'); 
     }
     else{
         switchToNextPlayer();
+    }
+    }else{
+        alert('Togloom duussan baina. NEW GAME tovchiig darj shineer ehluuleerei');
     }
 });
 
