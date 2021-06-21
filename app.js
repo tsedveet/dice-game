@@ -61,7 +61,7 @@ document.querySelector('.btn-hold').addEventListener('click', function(){
         switchToNextPlayer();
     }
     }else{
-        alert('Togloom duussan baina. NEW GAME tovchiig darj shineer ehluuleerei');
+        alert('Тоглоом дууссан байна. NEW GAME товчийг дарж шинээр эхлүүлээрэй.');
     }
 });
 
